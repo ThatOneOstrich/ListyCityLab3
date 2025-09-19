@@ -11,7 +11,7 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements AddEditDialog.UpdateCity {
 
     private ArrayList<City> dataList;
     private ListView cityList;
@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // create cities
         City edmonton = new City("Edmonton", "AB");
         City vancouver = new City("Vancouver", "BC");
         City toronto = new City("Toronto", "ON");
@@ -29,26 +30,27 @@ public class MainActivity extends AppCompatActivity {
         City denver = new City("Denver", "CO");
         City losAngeles = new City("Los Angeles", "CA");
 
-        // add all the city objects to dataList
+        // add cities to datalist
         dataList = new ArrayList<>();
-        dataList.add(edmonton);
-        dataList.add(vancouver);
-        dataList.add(toronto);
-        dataList.add(hamilton);
-        dataList.add(denver);
-        dataList.add(losAngeles);
+        dataList.addAll(Arrays.asList(edmonton, vancouver, toronto, hamilton, denver, losAngeles));
 
-        // set up array adapter and list view
         cityList = findViewById(R.id.city_list);
         cityAdapter = new ArrayAdapter<>(this, R.layout.content, dataList);
         cityList.setAdapter(cityAdapter);
 
-        // set up onitemclicklistener for list view
         cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            City selectedCity;
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                City selectedCity = cityAdapter.getItem(position);
+                selectedCity = dataList.get(position);
+                AddEditDialog addEditDialog = new AddEditDialog().newInstance(selectedCity, position);
+                addEditDialog.show(getSupportFragmentManager(), "AddEditDialog");
             }
         });
+
+    }
+    public void editCity(City updatedCity, int position) {
+        dataList.set(position, updatedCity);
+        cityAdapter.notifyDataSetChanged();
     }
 }

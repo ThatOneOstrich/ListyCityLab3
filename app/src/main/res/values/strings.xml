@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">ListyCityLab3</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="add_edit_text">Add/edit city</string>
-    <string name="add_edit_city">Add/edit city</string>
+    <string name="city_name_prompt">Enter city name</string>
+    <string name="state_abbreviation_prompt">Enter abbreviation</string>
+    <string name="cancel_button_text">Cancel</string>
+    <string name="okay_button_text">Okay</string>
 </resources>

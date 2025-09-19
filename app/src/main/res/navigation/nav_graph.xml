@@ -10,4 +10,12 @@
         android:name="com.example.listycitylab3.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main"/>
+    <dialog
+        android:id="@+id/addEditDialog"
+        android:name="com.example.listycitylab3.AddEditDialog"
+        android:label="AddEditDialog" >
+        <action
+            android:id="@+id/action_addEditDialog_to_mainActivity"
+            app:destination="@id/mainActivity" />
+    </dialog>
 </navigation>
